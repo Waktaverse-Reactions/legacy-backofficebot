@@ -1,14 +1,7 @@
-<h1 style="text-align:center;">Discord.js v14 Bot Template</h1>
+<h1 style="text-align:center;">Waktaverse Reactions Bot</h1>
 
-## Features
-
-* 🟦 Typescript
-* 🔥 Slash commands (supports auto complete!)
-* ✉️ Message commands
-* 🕛 Cooldowns
-* 🏴 Detailed Permissions
-* 💪 Event & Command handlers
-* 🍃 MongoDB Support
+## 소스 출처
+[discordjs-v14-template-ts](<https://github.com/MericcaN41/discordjs-v14-template-ts>) 사용
 
 ## Installation, Build and Run
 1) Clone the repository then create a file named `.env` and fill it out accordingly
