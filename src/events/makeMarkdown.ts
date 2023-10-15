@@ -117,7 +117,7 @@ authors: ['${postAuthor}']
       });
 
       // git commit 및 push (shell script 실행)
-      exec('sh ../Waktaverse-Reactions-Site/gitpush.sh', (error: ExecException | null, stdout: string, stderr: string) => {
+      exec('sh ./src/scripts/gitpush.sh', (error: ExecException | null, stdout: string, stderr: string) => {
         if (error) {
           console.error(`실행 중 에러 발생: ${error}`);
           interaction.reply('❌ 게시글 업로드를 실패했습니다.');
