@@ -9,6 +9,7 @@ logFile="/home/dos0313/push_log/"$Project_name"_push.log"
 SourceDir=$env_Project_Dir
 
 cd $SourceDir
+git pull https://$github_id:$github_Token@$github_Address
 git add .
 echo "shell : git add" >> $logFile 2>&1
 git commit -m "[$date] post commit"
