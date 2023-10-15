@@ -1,7 +1,8 @@
 import { Interaction } from "discord.js";
 import { BotEvent } from "../types";
+import { exec, ExecException } from 'child_process';
 
-var fs = require('fs');
+const fs = require('fs');
 
 const event: BotEvent = {
   name: "interactionCreate",
@@ -47,7 +48,8 @@ const event: BotEvent = {
       }      
 
       const cafeData = await extractCafeData(postCafeId);
-
+      
+      // Waktaverse Reactions 사이트 Markdown 형식에 맞게 값 변환
       function convertUnixTimeToDate(writeDate: number) {
         const date = new Date(writeDate);
         const year = date.getFullYear();
@@ -100,6 +102,7 @@ authors: ['${postAuthor}']
 
 ![왁리 구독하는법](https://cdn.discordapp.com/attachments/1136601898116464710/1137049857136267374/--2cut.gif)`;
 
+      // markdown 파일 생성
       fs.readdir('../Waktaverse-Reactions-Site/data/blog',function(err: string, filelist: string){
         const postNumber = filelist.length;
         console.log('📃 이번 게시글 번호 : ', postNumber);
@@ -112,6 +115,17 @@ authors: ['${postAuthor}']
           }
         });
       });
+
+      // git commit 및 push (shell script 실행)
+      exec('sh ./src/scripts/Waktaverse-Reactions-Site_gitpush.sh', (error: ExecException | null, stdout: string, stderr: string) => {
+        if (error) {
+          console.error(`실행 중 에러 발생: ${error}`);
+          return;
+        }
+        console.log(`표준 출력: ${stdout}`);
+        console.error(`표준 에러: ${stderr}`);
+      });
+
 
       interaction.reply('✅ 게시글을 생성 했습니다!');
     }
