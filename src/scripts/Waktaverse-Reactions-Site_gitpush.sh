@@ -4,9 +4,9 @@ source /home/dos0313/.bashrc
 date=$(date)
 github_id=$env_github_id
 github_Token=$env_github_Token
-github_Address=$env_autoTrade_git
+github_Address=$env_Project_git
 logFile="/home/dos0313/push_log/"$Project_name"_push.log"
-SourceDir=$env_autoTrade_Dir
+SourceDir=$env_Project_Dir
 
 cd $SourceDir
 
