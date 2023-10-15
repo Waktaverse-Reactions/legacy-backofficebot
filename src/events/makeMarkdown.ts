@@ -7,7 +7,7 @@ const event: BotEvent = {
     if (!interaction.isModalSubmit()) return;
     if (interaction.customId === 'postModal') {
       // 모달 입력 값 및 게시글 데이터 수집
-      const postTitle = interaction.fields.getTextInputValue('postTitle');
+      const postTitle = interaction.fields.getTextInputValue('postTitle').replace(/"/g, '');
       const postTags = interaction.fields.getTextInputValue('postTags');
       const postSummary = interaction.fields.getTextInputValue('postSummary');
       const postCafe = interaction.fields.getTextInputValue('postLink');
@@ -58,7 +58,7 @@ const event: BotEvent = {
       const convertDate = await convertUnixTimeToDate(cafeData?.writeDate);
       const postYoutubeId = extractCafeData(postYoutube);
 
-        interaction.reply(`
+      interaction.reply(`
 게시글 이름 : ${postTitle}
 참가자 명 : ${postTags}
 시청자 목록 : ${postSummary}
