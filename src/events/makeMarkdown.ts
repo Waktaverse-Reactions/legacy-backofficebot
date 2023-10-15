@@ -120,14 +120,13 @@ authors: ['${postAuthor}']
       exec('sh ../Waktaverse-Reactions-Site/gitpush.sh', (error: ExecException | null, stdout: string, stderr: string) => {
         if (error) {
           console.error(`실행 중 에러 발생: ${error}`);
+          interaction.reply('❌ 게시글 업로드를 실패했습니다.');
           return;
         }
         console.log(`표준 출력: ${stdout}`);
+        interaction.reply('✅ 게시글 업로드를 성공했습니다.');
         console.error(`표준 에러: ${stderr}`);
       });
-
-
-      interaction.reply('✅ 게시글을 생성 했습니다!');
     }
   }
 }
