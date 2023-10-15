@@ -1,6 +1,8 @@
 import { Interaction } from "discord.js";
 import { BotEvent } from "../types";
 
+var fs = require('fs');
+
 const event: BotEvent = {
   name: "interactionCreate",
   execute: async (interaction: Interaction) => {
@@ -21,7 +23,7 @@ const event: BotEvent = {
         } else if (postYoutube.includes('youtube.com/watch?v=')) {
           return postYoutube.split('v=')[1];
         } else {
-          console.log("유효한 유튜브 ID가 아닙니다");
+          console.log("❌ 유효한 유튜브 ID가 아닙니다");
           return null;
         }
       }
@@ -56,20 +58,62 @@ const event: BotEvent = {
       }
       
       const convertDate = await convertUnixTimeToDate(cafeData?.writeDate);
-      const postYoutubeId = extractCafeData(postYoutube);
+      const postYoutubeId = extractYoutubeId(postYoutube);
 
-      interaction.reply(`
-게시글 이름 : ${postTitle}
-참가자 명 : ${postTags}
-시청자 목록 : ${postSummary}
-왁물원 게시글 링크 : ${postCafe}
-유튜브 링크 : ${postYoutube}
+      const postTagsArray = `[${postTags.split(',').map(tag => `'${tag.trim()}'`).join(',')}]`;
 
-게시글 ID : ${postCafeId}
-유튜브 ID : ${postYoutubeId}
+      let postAuthor;
 
-작성자 닉네임: ${cafeData?.nick}
-작성일: ${convertDate}`); // 해당 값들을 markdown 만들 때 써야함
+      if (cafeData?.nick === '폼푸린') {
+        postAuthor = 'pompurin';
+      } else if (cafeData?.nick === 'NyMirror') {
+        postAuthor = 'nymirror';
+      } else if (cafeData?.nick === '울랜') {
+        postAuthor = 'woolan';
+      } else if (cafeData?.nick === 'Dos0313') {
+        postAuthor = 'do_s';
+      } else {
+        postAuthor = 'wakreactions';
+      }
+
+      const postData = `---
+title: '${postTitle}'
+date: '${convertDate}'
+tags: ${postTagsArray}
+draft: false
+summary: '${postSummary} 같이보기'
+images: ['https://i.ytimg.com/vi/${postYoutubeId}/maxresdefault.jpg']
+layout: PostLayout
+canonicalUrl:
+authors: ['${postAuthor}']
+---
+
+## 링크
+
+**같이보기 보러가기** (이미지를 클릭하여 이동)
+[![같이보기 보러가기](https://cdn.discordapp.com/attachments/1136601898116464710/1137050327938506852/logo.png)](https://cafe.naver.com/steamindiegame/${postCafeId})
+
+**MV 보러가기** (이미지를 클릭하여 이동)
+[![MV 시청하기](https://i.ytimg.com/vi/${postYoutubeId}/maxresdefault.jpg)](${postYoutube})
+
+## 추가 정보
+
+![왁리 구독하는법](https://cdn.discordapp.com/attachments/1136601898116464710/1137049857136267374/--2cut.gif)`;
+
+      fs.readdir('../Waktaverse-Reactions-Site/data/blog',function(err: string, filelist: string){
+        const postNumber = filelist.length;
+        console.log('📃 이번 게시글 번호 : ', postNumber);
+
+        fs.writeFile(`../Waktaverse-Reactions-Site/data/blog/${postNumber}.md`, postData, function(err: string){
+          if (err === null) {
+              console.log('✅ 게시글 생성 완료');
+          } else {
+              console.log('❌ 게시글 생성 실패');
+          }
+        });
+      });
+
+      interaction.reply('✅ 게시글을 생성 했습니다!');
     }
   }
 }
