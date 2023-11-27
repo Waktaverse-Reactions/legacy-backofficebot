@@ -74,6 +74,8 @@ const event: BotEvent = {
         postAuthor = 'woolan';
       } else if (cafeData?.nick === 'Dos0313') {
         postAuthor = 'do_s';
+      } else if (cafeData?.nick === '아무해'){
+        postAuthor = 'amuhae';
       } else {
         postAuthor = 'wakreactions';
       }
