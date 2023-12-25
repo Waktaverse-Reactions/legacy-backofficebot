@@ -37,10 +37,10 @@ const event: BotEvent = {
           const jsonData = await response.text();
           const data = JSON.parse(jsonData);
       
-          const nick = data.result.article.writer.nick;
+          const id = data.result.article.writer.id;
           const writeDate = data.result.article.writeDate;
       
-          return { nick, writeDate };
+          return { id, writeDate };
         } catch (error) {
             console.log("ERROR : ", error);
             return null;
@@ -66,15 +66,15 @@ const event: BotEvent = {
 
       let postAuthor;
 
-      if (cafeData?.nick === '폼푸린') {
+      if (cafeData?.id === "tkdgus1737") {
         postAuthor = 'pompurin';
-      } else if (cafeData?.nick === 'NyMirror') {
+      } else if (cafeData?.id === "lsj061100") {
         postAuthor = 'nymirror';
-      } else if (cafeData?.nick === '울랜') {
+      } else if (cafeData?.id === "doctorkiho") {
         postAuthor = 'woolan';
-      } else if (cafeData?.nick === 'Dos0313') {
+      } else if (cafeData?.id === "rlaxogus7094") {
         postAuthor = 'do_s';
-      } else if (cafeData?.nick === '아무해') {
+      } else if (cafeData?.id === "toparubi") {
         postAuthor = 'amuhae';
       } else {
         postAuthor = 'wakreactions';
