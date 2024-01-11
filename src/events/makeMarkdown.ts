@@ -68,14 +68,18 @@ const event: BotEvent = {
 
       if (cafeData?.id === "tkdgus1737") {
         postAuthor = 'pompurin';
-      } else if (cafeData?.id === "lsj061100") {
+      } else if (cafeData?.id == "lsj061100") {
         postAuthor = 'nymirror';
-      } else if (cafeData?.id === "doctorkiho") {
+      } else if (cafeData?.id == "doctorkiho") {
         postAuthor = 'woolan';
-      } else if (cafeData?.id === "rlaxogus7094") {
+      } else if (cafeData?.id == "rlaxogus7094") {
         postAuthor = 'do_s';
-      } else if (cafeData?.id === "toparubi") {
+      } else if (cafeData?.id == "toparubi") {
         postAuthor = 'amuhae';
+      } else if (cafeData?.id == "6summer1") {
+        postAuthor = 'roombell';
+      } else if (cafeData?.id == "smart-junchol") {
+        postAuthor = 'wnsak';
       } else {
         postAuthor = 'wakreactions';
       }
