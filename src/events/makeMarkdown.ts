@@ -78,8 +78,8 @@ const event: BotEvent = {
         postAuthor = 'amuhae';
       } else if (cafeData?.id == "6summer1") {
         postAuthor = 'roombell';
-      } else if (cafeData?.id == "smart-junchol") {
-        postAuthor = 'wnsak';
+      } else if (cafeData?.id == "qja7754") {
+        postAuthor = 'beomsin';
       } else {
         postAuthor = 'wakreactions';
       }
